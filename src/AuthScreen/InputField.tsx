@@ -4,7 +4,7 @@ import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/outline';
 
 interface InputFieldProps extends TextInputProps {
   label: string;
-  icon: ComponentType<{ size: number; className: string }>;
+  icon: ComponentType<{ size: number; className: string; color?: string }>;
   placeholder: string;
   password?: boolean;
 }
@@ -35,7 +35,7 @@ export default function InputField({
         {/* Outer container */}
         <View className="flex-row items-center rounded-lg border border-gray-700 bg-gray-800 px-3">
           {/* Left icon */}
-          <Icon size={20} className="text-gray-400 mr-2" />
+          <Icon size={20} color="#99a1af" className="mr-2" />
 
           {/* Input */}
           <TextInput
@@ -50,9 +50,9 @@ export default function InputField({
           {password && (
             <Pressable onPress={() => setSecure(!secure)}>
               {secure ? (
-                <EyeIcon size={20} className="text-gray-400" />
+                <EyeIcon size={20} color="#99a1af" />
               ) : (
-                <EyeSlashIcon size={20} className="text-gray-400" />
+                <EyeSlashIcon size={20} color="#99a1af" />
               )}
             </Pressable>
           )}
