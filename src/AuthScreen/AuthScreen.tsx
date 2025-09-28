@@ -21,16 +21,12 @@ export default function AuthScreen() {
     >
       <KeyboardAvoidingView behavior={'padding'} className="flex-1">
         <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: 'flex-start',
-            paddingTop: 10,
-          }}
+          contentContainerClassName="justify-start pt-2.5"
           showsVerticalScrollIndicator={false}
         >
           <View className="items-center">
             <WelcomeHeader />
-            <View className="rounded-2xl border p-6 border-gray-800 bg-gray-900 mx-8 mt-5">
+            <View className="rounded-2xl border p-6 border-gray-800 bg-gray-900 mx-8">
               <AuthTabSwitcher
                 selected={selected}
                 onSelectionChange={setSelected}
