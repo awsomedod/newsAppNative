@@ -8,11 +8,11 @@ interface AuthActionButtonProps {
   disabled?: boolean;
 }
 
-export default function AuthActionButton({ 
-  text, 
-  onPress, 
-  loading = false, 
-  disabled = false 
+export default function AuthActionButton({
+  text,
+  onPress,
+  loading = false,
+  disabled = false,
 }: AuthActionButtonProps) {
   const isDisabled = disabled || loading;
 
@@ -25,9 +25,10 @@ export default function AuthActionButton({
           rounded-lg px-4 py-2.5
           text-sm font-medium shadow-sm
           transition-colors duration-200
-          ${isDisabled 
-            ? 'bg-gray-600 opacity-50' 
-            : 'bg-blue-600 active:bg-blue-700'
+          ${
+            isDisabled
+              ? 'bg-gray-600 opacity-50'
+              : 'bg-blue-600 active:bg-blue-700 opacity-100'
           }
         `}
         disabled={isDisabled}

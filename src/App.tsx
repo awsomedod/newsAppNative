@@ -3,9 +3,13 @@
 import '../global.css';
 import * as React from 'react';
 import { useEffect } from 'react';
+import { LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './AppNavigator.tsx';
 import { GoogleSignInService } from './services/GoogleSignInService';
+
+// Disable all warnings in development
+LogBox.ignoreAllLogs(true);
 
 export default function App() {
   /**
