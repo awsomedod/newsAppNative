@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import InputField from './InputField';
+import InputField from '../InputField';
 import {
   AtSymbolIcon,
   UserIcon,

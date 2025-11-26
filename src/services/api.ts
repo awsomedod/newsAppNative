@@ -56,6 +56,16 @@ export interface UserDataResponse {
   };
 }
 
+export interface SuggestSourcesResponse {
+  topic: string;
+  sources: Array<{
+    name: string;
+    url: string;
+    description: string;
+  }>;
+  count: number;
+}
+
 export class ApiService {
   /**
    * Generate headers for API requests
@@ -195,5 +205,18 @@ export class ApiService {
     });
 
     return this.handleResponse<any>(response);
+  }
+
+  /**
+   * Suggest news sources based on a topic
+   */
+  static async suggestSources(token: string, topic: string): Promise<SuggestSourcesResponse> {
+    const response = await fetch(`${API_BASE_URL}/suggest-sources`, {
+      method: 'POST',
+      headers: this.getHeaders(token),
+      body: JSON.stringify({ topic }),
+    });
+
+    return this.handleResponse<SuggestSourcesResponse>(response);
   }
 }

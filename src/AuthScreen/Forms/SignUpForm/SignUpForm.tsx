@@ -1,12 +1,12 @@
 import { View, Alert } from 'react-native';
 import { useState } from 'react';
-import OrDivider from './OrDivider';
+import OrDivider from '../OrDivider';
 import SignUpInputs from './SignUpInputs';
-import AuthActionButton from './AuthActionButton';
+import AuthActionButton from '../AuthActionButton';
 import GoogleSignUpSection from './GoogleSignUpSection';
 import SwitchToLoginLink from './SwitchToLoginLink';
-import { useAuth } from '../contexts/AuthContext';
-import { ApiService } from '../services/api';
+import { useAuth } from '../../../contexts/AuthContext';
+import { ApiService } from '../../../services/api';
 
 export default function SignUpForm() {
   const { login } = useAuth();

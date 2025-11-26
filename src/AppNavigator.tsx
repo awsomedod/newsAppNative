@@ -6,7 +6,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import GradientBackground from './Global/GradientBackground';
 import LandingScreen from './LandingScreen/LandingScreen';
 import AuthScreen from './AuthScreen/AuthScreen';
-import DashboardScreen from './screens/DashboardScreen';
+import DashboardScreen from './DashboardScreen/DashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +39,7 @@ function AppNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: 'white' },
+        contentStyle: { backgroundColor: 'transparent' },
         animation: 'simple_push',
         animationDuration: 50,
       }}

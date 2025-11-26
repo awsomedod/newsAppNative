@@ -7,9 +7,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
-import { GoogleSignInService } from '../services/GoogleSignInService';
-import { ApiService } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
+import { GoogleSignInService } from '../../services/GoogleSignInService';
+import { ApiService } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface GoogleButtonProps {
   text: string;

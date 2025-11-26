@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
-import { AuthContext } from './AuthScreen';
+import { AuthContext } from '../../AuthScreen';
 
 export default function AuthActionLinks() {
   const { setSelected } = useContext(AuthContext);

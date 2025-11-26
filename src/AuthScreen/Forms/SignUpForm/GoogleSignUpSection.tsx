@@ -1,9 +1,9 @@
 import { View, Alert } from 'react-native';
 import { useState, useRef, useEffect } from 'react';
-import InputField from './InputField';
-import GoogleSignInButton from './GoogleSignInButton';
+import InputField from '../InputField';
+import GoogleSignInButton from '../GoogleSignInButton';
 import { UserIcon } from 'react-native-heroicons/outline';
-import { ApiService } from '../services/api';
+import { ApiService } from '../../../services/api';
 
 export default function GoogleSignUpSection() {
   const [googleUsername, setGoogleUsername] = useState('');

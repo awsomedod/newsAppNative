@@ -1,10 +1,10 @@
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import WelcomeHeader from './WelcomeHeader';
-import AuthTabSwitcher from './AuthTabSwitcher';
+import WelcomeHeader from './Components/WelcomeHeader';
+import AuthTabSwitcher from './Components/AuthTab/AuthTabSwitcher';
 import { useState } from 'react';
-import LoginForm from './LoginForm';
-import SignUpForm from './SignUpForm';
+import LoginForm from './Forms/LoginForm/LoginForm';
+import SignUpForm from './Forms/SignUpForm/SignUpForm';
 import { createContext } from 'react';
 
 export const AuthContext = createContext({

@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import InputField from './InputField';
+import InputField from '../InputField';
 import { LockClosedIcon, UserIcon } from 'react-native-heroicons/outline';
 
 interface LoginInputsProps {
