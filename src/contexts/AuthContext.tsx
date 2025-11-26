@@ -17,13 +17,11 @@ export interface User {
     description: string;
   }>;
   summary_runs?: Array<{
-    id: string;
     date_and_time: string;
     summaries: Array<{
       title: string;
       summary: string;
       image: string;
-      url: string;
     }>;
   }>;
 }

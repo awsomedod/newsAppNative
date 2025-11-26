@@ -148,7 +148,6 @@ export default function DashboardScreen() {
       const newRun: SummaryRun = {
         date_and_time: response.date_and_time,
         summaries: response.summaries,
-        id: response.id || Date.now().toString(), // Fallback ID if not provided
       };
 
       const updatedSummaryRuns = [newRun, ...summaryRuns];

@@ -99,9 +99,7 @@ export default function AddSourceModal({
   };
 
   const handleAddSelected = async () => {
-    const selectedSources = suggestions
-      .filter(s => selectedIds.has(s.id))
-      .map(({ id, ...source }) => source); // Remove the temporary ID
+    const selectedSources = suggestions.filter(s => selectedIds.has(s.id));
 
     if (selectedSources.length === 0) return;
 

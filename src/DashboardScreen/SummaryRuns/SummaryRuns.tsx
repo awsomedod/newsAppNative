@@ -1,5 +1,4 @@
 import { View } from 'react-native';
-import { useEffect, useState } from 'react';
 import { Summary, SummaryRun } from '../types';
 import SummaryRunsHeader from './SummaryRunsHeader';
 import SummaryRunsLoading from './SummaryRunsLoading';
@@ -22,7 +21,6 @@ export default function SummaryRunsSection({
   loading,
   summaryRuns,
   refreshDisabled,
-  setRefreshDisabled,
   setSelectedSummary,
   setSummaryMode,
   setModalVisible,
