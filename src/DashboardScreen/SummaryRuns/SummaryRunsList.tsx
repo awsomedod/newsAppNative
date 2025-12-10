@@ -41,6 +41,7 @@ export default function SummaryRunsList({
             title={item.title}
             summary={item.summary}
             image={item.image}
+            topic={item.topic}
             onPress={() => {
               setSelectedSummary(item);
               setSummaryMode(true);

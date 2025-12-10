@@ -5,13 +5,15 @@ import DashboardHeader from './Components/DashboardHeader';
 import WelcomeSection from './Components/WelcomeSection';
 import NewsSourcesSection from './NewsSources/NewsSourcesSection';
 import Backdrop from './Components/Backdrop';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { DropdownContext } from '../contexts/DropdowContext';
 import SummaryRunsSection from './SummaryRuns/SummaryRuns';
 import { ApiService } from '../services/api';
 import { useEffect } from 'react';
 import { Summary, Source, SummaryRun } from './types';
 import DashboardModal from './Modals/DashboardModal';
+import { useNewsGeneration } from './hooks/useNewsGeneration';
+
 /**
  * Main dashboard screen for authenticated users
  * Shows welcome message and provides logout functionality
@@ -27,7 +29,41 @@ export default function DashboardScreen() {
   const [sources, setSources] = useState<Array<Source>>([]);
   const [summaryRuns, setSummaryRuns] = useState<Array<SummaryRun>>([]);
   const [refreshDisabled, setRefreshDisabled] = useState(true);
-  const [isGenerating, setIsGenerating] = useState(false);
+
+  // Callback when news generation completes
+  const handleGenerationComplete = useCallback(
+    (newRun: SummaryRun) => {
+      // Add new summary run to the top of the list
+      setSummaryRuns(prev => [newRun, ...prev]);
+
+      // Update user context to keep it in sync
+      if (user) {
+        updateUser({
+          ...user,
+          summary_runs: [...(user.summary_runs || []), newRun],
+        });
+      }
+    },
+    [user, updateUser],
+  );
+
+  // Use the SSE news generation hook
+  const {
+    generateNews,
+    isGenerating,
+    error: generationError,
+    phase,
+    statusMessage,
+    topics,
+    totalTopics,
+    liveSummaries,
+    isGeneratingSummaries,
+    completedSummaries,
+  } = useNewsGeneration({
+    sources,
+    token,
+    onComplete: handleGenerationComplete,
+  });
 
   /**
    * Handle user logout with confirmation
@@ -133,42 +169,10 @@ export default function DashboardScreen() {
     }
   };
 
-  const handleRefreshNews = async () => {
+  // Handle generating news using SSE stream
+  const handleRefreshNews = () => {
     if (!token || !user) return;
-
-    setIsGenerating(true);
-    try {
-      const sourceUrls = sources.map(s => s.url);
-      const response = await ApiService.generateNews(token, sourceUrls);
-
-      // Create new summary run from response
-      // The response structure is not fully defined in types, but based on the prompt:
-      // "respond with a date and time and an array of the new summaries only"
-      // Assuming response matches SummaryRun interface partially or fully
-      const newRun: SummaryRun = {
-        date_and_time: response.date_and_time,
-        summaries: response.summaries,
-      };
-
-      const updatedSummaryRuns = [newRun, ...summaryRuns];
-      setSummaryRuns(updatedSummaryRuns);
-
-      // Update user context as well to keep it in sync
-      updateUser({
-        ...user,
-        summary_runs: [
-          // Map to match User interface structure if different, but it seems similar enough
-          // based on AuthContext.tsx User interface
-          ...(user.summary_runs || []),
-          newRun,
-        ],
-      });
-    } catch (error) {
-      console.error('Failed to refresh news:', error);
-      Alert.alert('Error', 'Failed to generate news. Please try again.');
-    } finally {
-      setIsGenerating(false);
-    }
+    generateNews();
   };
 
   return (
@@ -213,6 +217,15 @@ export default function DashboardScreen() {
               setModalVisible={setModalVisible}
               onRefresh={handleRefreshNews}
               isGenerating={isGenerating}
+              // SSE generation state
+              phase={phase}
+              statusMessage={statusMessage}
+              topics={topics}
+              totalTopics={totalTopics}
+              completedSummaries={completedSummaries}
+              isGeneratingSummaries={isGeneratingSummaries}
+              liveSummaries={liveSummaries}
+              error={generationError}
             />
           </View>
         </DropdownContext.Provider>

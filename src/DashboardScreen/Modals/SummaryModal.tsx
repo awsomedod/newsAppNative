@@ -35,6 +35,15 @@ export default function SummaryModal({
           />
         </View>
         <View className="flex-1 min-w-0">
+          {/* Topic tag - only show if topic exists */}
+          {summary.topic && (
+            <View className="flex-row items-center gap-1 px-2 py-0.5 mb-2 bg-blue-900/40 rounded-md self-start">
+              <View className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <Text className="text-[10px] font-semibold text-blue-300 uppercase tracking-wider">
+                {summary.topic}
+              </Text>
+            </View>
+          )}
           <Text className="text-xl font-semibold text-white leading-tight">
             {summary.title}
           </Text>

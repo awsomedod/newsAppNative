@@ -4,6 +4,7 @@ interface SummaryItemProps {
   title: string;
   summary: string;
   image: string;
+  topic?: string;
   onPress: () => void;
 }
 
@@ -11,6 +12,7 @@ export default function SummaryItem({
   title,
   summary,
   image,
+  topic,
   onPress,
 }: SummaryItemProps) {
   return (
@@ -27,6 +29,16 @@ export default function SummaryItem({
         </View>
 
         <View className="flex-1 min-w-0">
+          {/* Topic tag - only show if topic exists */}
+          {topic && (
+            <View className="flex-row items-center gap-1 px-2 py-0.5 mb-2 bg-blue-900/40 rounded-md self-start">
+              <View className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <Text className="text-[10px] font-semibold text-blue-300 uppercase tracking-wider">
+                {topic}
+              </Text>
+            </View>
+          )}
+
           <Text className="text-sm font-medium text-white line-clamp-2 leading-tight mb-2">
             {title}
           </Text>
